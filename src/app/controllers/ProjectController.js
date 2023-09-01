@@ -1,49 +1,82 @@
 const Project = require("../models/Project");
 
-class ProjectController {
-  async index(req, res) {
+const index = async (req, res) => {
+  try {
     const projects = await Project.find();
-    return res.json(projects);
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
   }
+};
 
-  async show(req, res) {
+const show = async (req, res) => {
+  try {
     const { id } = req.params;
-
     const project = await Project.findById(id);
-    return res.json(project);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    res.json(project);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
   }
+};
 
-  async store(req, res) {
+const store = async (req, res) => {
+  try {
     const { body } = req;
     const { title } = body;
 
     const hasProject = await Project.findOne({ title });
-
     if (hasProject) {
       return res.status(400).json({ error: 'Duplicated project' });
     }
 
     const project = await Project.create(body);
-    return res.status(200).json(project);
+    res.status(200).json(project);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
   }
+};
 
-  async update(req, res) {
+const update = async (req, res) => {
+  try {
     const { body } = req;
     const { id } = req.params;
 
     const project = await Project.findByIdAndUpdate(id, body, {
-      new: true
+      new: true,
     });
 
-    return res.json(project);
-  }
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
 
-  async destroy(req, res) {
+    res.json(project);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
+const destroy = async (req, res) => {
+  try {
     const { id } = req.params;
+    const project = await Project.findByIdAndDelete(id);
 
-    await Project.findByIdAndDelete(id);
-    return res.send();
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+
+    res.send();
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
   }
-}
+};
 
-module.exports = new ProjectController();
+module.exports = {
+  index,
+  show,
+  store,
+  update,
+  destroy,
+};

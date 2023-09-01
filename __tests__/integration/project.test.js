@@ -2,7 +2,6 @@ const request = require('supertest');
 const mongoose = require("mongoose");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 
-const Project = require('../../src/app/models/Project');
 const app = require('../../src/app');
 
 describe('Project', () => {
