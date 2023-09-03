@@ -61,10 +61,11 @@ const update = async (req, res) => {
 const destroy = async (req, res) => {
   try {
     const { id } = req.params;
-    const project = await Project.findByIdAndDelete(id);
 
-    if (!project) {
-      return res.status(404).json({ error: 'Project not found' });
+    try {
+      await Project.findByIdAndDelete(id);
+    } catch (e) {
+      res.status(404).json({ error: 'Project not found' });
     }
 
     res.send();
