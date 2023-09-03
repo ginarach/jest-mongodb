@@ -131,4 +131,38 @@ describe('Project', () => {
     const responseDelete = await request(app).delete('/projects/10');
     expect(responseDelete.status).toBe(404);
   });
+
+
+  it('should show sorted projects', async () => {
+    const data = [{
+      title: "c",
+      description: "Um projeto muito massa!"
+    },
+    {
+      title: "a",
+      description: "Um projeto muito massa!"
+    },
+    {
+      title: "b",
+      description: "Um projeto muito massa!"
+    }]
+
+    await request(app)
+      .post('/projects')
+      .send(data[0])
+    await request(app)
+      .post('/projects')
+      .send(data[1])
+    await request(app)
+      .post('/projects')
+      .send(data[2])
+
+    const response = await request(app)
+      .get('/projects-sorted');
+
+    expect(response.body.length).toBe(3);
+    expect(response.body[0].title).toBe('a')
+    expect(response.body[1].title).toBe('b')
+    expect(response.body[2].title).toBe('c')
+  });
 })

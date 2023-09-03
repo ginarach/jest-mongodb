@@ -9,6 +9,15 @@ const index = async (req, res) => {
   }
 };
 
+const indexSorted = async (req, res) => {
+  try {
+    const projects = await Project.find().sort({ title: 1 });
+    res.json(projects);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 const show = async (req, res) => {
   try {
     const { id } = req.params;
@@ -76,6 +85,7 @@ const destroy = async (req, res) => {
 
 module.exports = {
   index,
+  indexSorted,
   show,
   store,
   update,

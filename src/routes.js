@@ -4,6 +4,7 @@ const ProjectController = require("./app/controllers/ProjectController");
 const routes = Router();
 
 routes.get("/projects", ProjectController.index);
+routes.get("/projects-sorted", ProjectController.indexSorted);
 routes.get("/projects/:id", ProjectController.show);
 routes.post("/projects", ProjectController.store);
 routes.put("/projects/:id", ProjectController.update);
