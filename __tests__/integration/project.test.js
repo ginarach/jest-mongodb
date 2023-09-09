@@ -34,8 +34,8 @@ describe('Project', () => {
     const response = await request(app)
       .post('/projects')
       .send({
-        title: "Projeto Node.js IIIIIIIIIIIII",
-        description: "Um projeto muito massa!"
+        title: "Project MongoDB",
+        description: "Making project based on MongoDB"
       })
 
     expect(response.status).toBe(200);
@@ -49,15 +49,15 @@ describe('Project', () => {
     await request(app)
       .post('/projects')
       .send({
-        title: "Projeto Node.js IIIIIIIIIIIII",
-        description: "Um projeto muito massa!"
+        title: "Project MongoDB",
+        description: "Making project based on MongoDB"
       })
 
     const response = await request(app)
       .post('/projects')
       .send({
-        title: "Projeto Node.js IIIIIIIIIIIII",
-        description: "Um projeto muito massa!"
+        title: "Project MongoDB",
+        description: "Making project based on MongoDB"
       });
 
     expect(response.body).toMatchObject({ error: 'Duplicated project' });
@@ -80,8 +80,8 @@ describe('Project', () => {
     const responseCreate = await request(app)
       .post('/projects')
       .send({
-        title: "Projeto Node.js IIIIIIIIIIIII",
-        description: "Um projeto muito massa!"
+        title: "Project MongoDB",
+        description: "Making project based on MongoDB"
       })
     expect(responseCreate.status).toBe(200);
     const responseGet = await request(app)
@@ -91,8 +91,8 @@ describe('Project', () => {
 
   it("should be able to update a project", async () => {
     const responseCreate = await request(app).post("/projects").send({
-      title: "Awesome Project",
-      description: "lorem ipsum bla bla blaaaaaa",
+      title: "New Project MongoDB",
+      description: "A different kind of MongoDB project",
     });
     expect(responseCreate.status).toBe(200);
 
@@ -111,8 +111,8 @@ describe('Project', () => {
 
   it("should be able to delete a project", async () => {
     const responseCreate = await request(app).post("/projects").send({
-      title: "Awesome Project",
-      description: "lorem ipsum bla bla blaaaaaa",
+      title: "New Project MongoDB",
+      description: "A different kind of MongoDB project",
     });
     expect(responseCreate.status).toBe(200);
 
@@ -136,15 +136,15 @@ describe('Project', () => {
   it('should show sorted projects', async () => {
     const data = [{
       title: "c",
-      description: "Um projeto muito massa!"
+      description: "Making project based on MongoDB"
     },
     {
       title: "a",
-      description: "Um projeto muito massa!"
+      description: "Making project based on MongoDB"
     },
     {
       title: "b",
-      description: "Um projeto muito massa!"
+      description: "Making project based on MongoDB"
     }]
 
     await request(app)

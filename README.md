@@ -1,4 +1,4 @@
-# Jest e MongoDB
+# Jest MongoDB
 
 This repository contains an example of a simple API, that uses mongo as a database, and Jest for testing.
 
@@ -9,23 +9,64 @@ This repository contains an example of a simple API, that uses mongo as a databa
 
 ## Instructions
 
-0. Install [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable) (optional)
+1. Install [Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#windows-stable) (optional)
 ```
 npm install --global yarn
 ```
-1. Install Dependencies
+2. Install Dependencies
 
 ```
 yarn
 ```
-2. Run Test
+3. Run Test
 
 ```
 yarn test
 ```
-3. Run Server
+4. Run Server
 
 ```
 # make sure local mongodb server is on, then run:
 yarn start
+```
+
+# List of API
+
+/API/Projects
+```
+[GET] /projects
+===== Get list of projects
+
+[GET] /projects/:id
+===== Get one project by ID
+
+[GET] /projects-sorted
+===== Get list of projects in ascending order
+
+[PUT] /projects/:id
+===== Update project
+
+[POST] /projects
+===== Create project
+
+[DEL] /projects/:id
+===== Delete project's account
+```
+
+/API/Programmers
+```
+[GET] /programmers
+===== Get list of programmers
+
+[GET] /programmers/:id
+===== Get one programmer by ID
+
+[PUT] /programmers/:id
+===== Update programmer by ID
+
+[POST] /programmers
+===== Create programmer
+
+[DEL] /programmers/:id
+===== Delete programmer's account
 ```
